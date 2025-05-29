@@ -11,7 +11,7 @@ function renderizarData(): void {
 }
 
 const DataComponent = {
-  atualizar: function() {
+  atualizarData: function() {
     renderizarData();    
   }
 }

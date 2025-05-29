@@ -8,7 +8,7 @@ function renderizarData() {
     }
 }
 const DataComponent = {
-    atualizar: function () {
+    atualizarData: function () {
         renderizarData();
     }
 };
