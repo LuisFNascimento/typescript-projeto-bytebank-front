@@ -5,7 +5,7 @@ import { GrupoTransacao } from "./GrupoTransacao.js";
 let saldo: number = JSON.parse(localStorage.getItem("saldo")) || 0;
 const transacoes: Transacao[] = JSON.parse(localStorage.getItem("transacoes"), (key: string, value: string) => {
   if (key === "data") {
-          return new Date(value); // Converte a string de volta para Date
+          return new Date(value); 
       }
 
       return value;
@@ -20,7 +20,7 @@ function debitar(valor: number): void {
     }
     
     saldo -= valor;
-    localStorage.setItem("saldo", JSON.stringify(saldo));
+    localStorage.setItem("saldo", saldo.toString());
 }
 
 function depositar(valor: number): void {
@@ -28,7 +28,7 @@ function depositar(valor: number): void {
         throw new Error("Valor de depósito deve ser maior que zero!");
     }      
     saldo += valor;
-    localStorage.setItem("saldo", JSON.stringify(saldo));
+    localStorage.setItem("saldo", saldo.toString());
 }
 
 const Conta = {
