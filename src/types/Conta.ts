@@ -41,7 +41,7 @@ const Conta = {
     return new Date();
   },
 
-  getGrupoTransacoes(): GrupoTransacao[] {
+  getGruposTransacoes(): GrupoTransacao[] {
     const gruposTransacoes: GrupoTransacao[] = [];
     const listaTransacoes : Transacao[] = structuredClone(transacoes);
     const transacoesOrdenadas: Transacao[] = listaTransacoes.sort((t1, t2) => t2.data.getTime() - t1.data.getTime());
@@ -71,12 +71,13 @@ const Conta = {
         novaTransacao.tipoTransacao === TipoTransacao.PAGAMENTO_BOLETO
       ) {
         debitar(novaTransacao.valor);
+        novaTransacao.valor *= -1; // Inverte o valor para manter o saldo correto
       } else {
         throw new Error("Tipo de Transação é inválida!");
       }
 
       transacoes.push(novaTransacao);
-      console.log(this.getGrupoTransacoes());
+      console.log(Conta.getGruposTransacoes());
       localStorage.setItem("transacoes", JSON.stringify(transacoes));
 
   }

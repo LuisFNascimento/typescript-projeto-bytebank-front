@@ -2,15 +2,15 @@ import Conta from "../types/Conta.js";
 import { FormatoData } from "../types/FormatoData.js";
 import { formatarData, formatarMoeda } from "../utils/formatters.js";
 const elementoRegistroTransacoesExtrato = document.querySelector(".extrato .registro-transacoes");
-renderizarExtrato;
+renderizarExtrato();
 function renderizarExtrato() {
-    const gruposTransacoes = Conta.getGrupoTransacoes();
+    const gruposTransacoes = Conta.getGruposTransacoes();
     elementoRegistroTransacoesExtrato.innerHTML = "";
     let htmlRegistroTransacoes = "";
     for (let grupoTransacao of gruposTransacoes) {
-        let htmlTransacoesItem = "";
+        let htmlTransacaoItem = "";
         for (let transacao of grupoTransacao.transacoes) {
-            htmlTransacoesItem += `
+            htmlTransacaoItem += `
                <div class="transacao-item">
                     <div class="transacao-info">
                         <span class="tipo">${transacao.tipoTransacao}</span>
@@ -23,7 +23,7 @@ function renderizarExtrato() {
         htmlRegistroTransacoes += `
             <div class="transacoes-group">
                  <strong class="mes-group">${grupoTransacao.label}</strong>
-                ${htmlTransacoesItem}
+                ${htmlTransacaoItem}
             </div>
         `;
     }
@@ -34,3 +34,9 @@ function renderizarExtrato() {
     // Atualiza o HTML do elemento de registro de transações
     elementoRegistroTransacoesExtrato.innerHTML = htmlRegistroTransacoes;
 }
+const ExtratoComponent = {
+    atualizar() {
+        renderizarExtrato();
+    }
+};
+export default ExtratoComponent;
