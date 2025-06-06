@@ -21,6 +21,5 @@ export function agruparTransacoes(transacoes: { tipoTransacao: TipoTransacao, va
                 break;
         }
     });
-
     return resumo;
 }

@@ -26,7 +26,6 @@ function renderizarExtrato(): void {
                 </div>
             `;
         }
-
         htmlRegistroTransacoes += `
             <div class="transacoes-group">
                  <strong class="mes-group">${grupoTransacao.label}</strong>

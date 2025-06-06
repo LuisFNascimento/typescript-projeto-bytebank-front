@@ -6,7 +6,6 @@ export function formatarMoeda(valor: number): string {
     currency: 'BRL',
   });
 }
-
   export function formatarData(data: Date, formato: FormatoData = FormatoData.PADRAO ): string {
     if (formato === FormatoData.DIA_SEMANA_DIA_MES_ANO) {
   const dataFormatada = data.toLocaleDateString('pt-BR', {
