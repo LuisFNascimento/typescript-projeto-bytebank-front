@@ -1,20 +1,8 @@
 import { TipoTransacao } from "./TipoTransacao.js";
 export class Conta {
-    static getSaldo() {
-        throw new Error("Method not implemented.");
-    }
-    static getDataAcesso() {
-        throw new Error("Method not implemented.");
-    }
-    static registrarTransacao(novaTransacao) {
-        throw new Error("Method not implemented.");
-    }
-    static getGruposTransacoes() {
-        throw new Error("Method not implemented.");
-    }
     nome;
-    saldo = JSON.parse(localStorage.getItem("saldo") || "0");
-    transacoes = JSON.parse(localStorage.getItem("transacoes") || "[]", (key, value) => {
+    saldo = JSON.parse(localStorage.getItem("saldo")) || 0;
+    transacoes = JSON.parse(localStorage.getItem("transacoes"), (key, value) => {
         if (key === "data") {
             return new Date(value);
         }
@@ -29,9 +17,7 @@ export class Conta {
         const transacoesOrdenadas = listaTransacoes.sort((t1, t2) => t2.data.getTime() - t1.data.getTime());
         let labelAtualGrupoTransacao = "";
         for (let transacao of transacoesOrdenadas) {
-            let labelGrupoTransacao = transacao.data.toLocaleDateString("pt-BR", {
-                month: "long", year: "numeric"
-            });
+            let labelGrupoTransacao = transacao.data.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
             if (labelAtualGrupoTransacao !== labelGrupoTransacao) {
                 labelAtualGrupoTransacao = labelGrupoTransacao;
                 gruposTransacoes.push({
@@ -53,8 +39,7 @@ export class Conta {
         if (novaTransacao.tipoTransacao === TipoTransacao.DEPOSITO) {
             this.depositar(novaTransacao.valor);
         }
-        else if (novaTransacao.tipoTransacao === TipoTransacao.TRANSFERENCIA ||
-            novaTransacao.tipoTransacao === TipoTransacao.PAGAMENTO_BOLETO) {
+        else if (novaTransacao.tipoTransacao === TipoTransacao.TRANSFERENCIA || novaTransacao.tipoTransacao === TipoTransacao.PAGAMENTO_BOLETO) {
             this.debitar(novaTransacao.valor);
             novaTransacao.valor *= -1; // Inverte o valor para manter o saldo correto
         }
@@ -83,5 +68,5 @@ export class Conta {
         localStorage.setItem("saldo", this.saldo.toString());
     }
 }
-const conta = new Conta("Luís Fernando");
-export default Conta;
+const conta = new Conta("Luís Fernando Nascimento");
+export { conta };

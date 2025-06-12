@@ -1,5 +1,5 @@
 import { TipoTransacao } from "../types/TipoTransacao.js";
-import { ResumoTransacoes } from "../types/ResumoTransacoes";
+import { ResumoTransacoes } from "../types/ResumoTransacoes.js";
 
 export function agruparTransacoes(transacoes: { tipoTransacao: TipoTransacao, valor: number }[]): ResumoTransacoes {
     const resumo: ResumoTransacoes = {
