@@ -87,7 +87,19 @@ export class Conta {
     this.saldo += valor;
     Armazenador.salvar("saldo", this.saldo.toString());
   }
+
+}
+
+export class ContaPremium extends Conta {
+  registrarTransacao(transacao: Transacao): void {
+    if (transacao.tipoTransacao === TipoTransacao.DEPOSITO) {
+      console.log("Você ganhou um bônus de 0.50 centavos!");
+      transacao.valor += 0.50;
+    }
+    super.registrarTransacao(transacao);
+  }
 }
 
 const conta = new Conta("Luís Fernando Nascimento");
+const contaPremium = new ContaPremium("Joice Nascimento");
 export { conta };
