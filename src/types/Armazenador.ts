@@ -6,7 +6,7 @@ export class Armazenador {
         localStorage.setItem(chave, valorComoString);
     }
  
-    static obter(chave: string, reviver?: (this: any, key: string, value: any) => any): any {
+    static obter<T>(chave: string, reviver?: (this: any, key: string, value: any) => any): T | null {
         const valor = localStorage.getItem(chave);
 
         if (valor === null) {
@@ -14,10 +14,10 @@ export class Armazenador {
         }
         // Se houver reviver, usa o método JSON.parse com o reviver
         if (reviver) {
-            return JSON.parse(valor, reviver);
+            return JSON.parse(valor, reviver) as T;
         } 
         // Se não houver reviver, retorna o valor como está
-        return JSON.parse(valor);
+        return JSON.parse(valor) as T;
         
     }
 
